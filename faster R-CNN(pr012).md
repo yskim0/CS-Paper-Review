@@ -111,5 +111,5 @@ https://curt-park.github.io/2017-03-17/faster-rcnn/
 
 ## Code
 
-구현이 복잡하기 때문에 
+구현이 복잡하기 때문에 추후로 미룸
 ```
