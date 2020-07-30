@@ -107,7 +107,7 @@ NIN(Network in Network)
 
 <img width="446" alt="스크린샷 2020-07-31 오전 2 54 10" src="https://user-images.githubusercontent.com/48315997/88956952-1cbb6200-d2d9-11ea-8f84-b1b67a802ae8.png">
 
-    - bg 관련해서 덜 실수함.
+   - bg 관련해서 덜 실수함.
 
 - Fast R-CNN과 combine했더니 속도 떨어짐
 
@@ -213,7 +213,9 @@ NIN(network in network)
 (References for your additional studies)
 
 https://www.youtube.com/watch?v=eTDcoeqj1_w
+
 https://arclab.tistory.com/162
+
 https://arclab.tistory.com/165
 
 
