@@ -22,7 +22,7 @@ GAN에는 두 가지 모델이 존재함.
 - 즉, G는 D를 최대한 속이려고 노력하고, D는 G가 만든 이미지를 최대한 감별하려고 노력함.
 - 이 경쟁 속에서 두 모델은 모두 발전하게 되고, 결과적으로는 G가 만든 이미지를 구별할 수 없는 상태에 도달하게 됨. 
 
-<img width="592" alt="스크린샷 2020-08-08 오후 12 18 01" src="https://user-images.githubusercontent.com/48315997/89702019-b5a44a00-d977-11ea-971b-f3e800d5ac7b.png">
+![1](https://user-images.githubusercontent.com/48315997/89702019-b5a44a00-d977-11ea-971b-f3e800d5ac7b.png)
 
 <br>
 
@@ -47,7 +47,7 @@ GAN에는 두 가지 모델이 존재함.
 
 ### GAN loss/objective function
 
-<img width="476" alt="스크린샷 2020-08-08 오후 12 27 25" src="https://user-images.githubusercontent.com/48315997/89702021-b806a400-d977-11ea-87ad-6f12b78a0939.png">
+![2](https://user-images.githubusercontent.com/48315997/89702021-b806a400-d977-11ea-87ad-6f12b78a0939.png)
 
 - D 입장에서는 위 수식이 0인게 Maximize
 - G 입장에서는 속이는 게 좋으니 Mininmize
@@ -59,7 +59,7 @@ GAN에는 두 가지 모델이 존재함.
 - 하지만 위의 `log(1-x)` 로는 그때 기울기의 절댓값이 작음.
 - practical use : D가 가짜라 확신하는 상황을 최대한 빨리 벗어나려면, D(G(z))=0인 점에서 기울기가 거의 무한인 `log(x)`를 씀
 
-![스크린샷 2020-08-08 오후 12 33 14](https://user-images.githubusercontent.com/48315997/89702023-b937d100-d977-11ea-97d7-1245192f4975.png)
+![3](https://user-images.githubusercontent.com/48315997/89702023-b937d100-d977-11ea-97d7-1245192f4975.png)
 
 
 - 모델이 생성한 이미지 분포와 실제 이미지 분포 간의 차이를 계산해주는 함수로 `Jenson-Shannon divergence` 사용함.
@@ -70,9 +70,9 @@ GAN에는 두 가지 모델이 존재함.
 
 - Proposition 1. 
 
-![스크린샷 2020-08-08 오후 12 43 28](https://user-images.githubusercontent.com/48315997/89702024-bb9a2b00-d977-11ea-99ab-a850c92cf5f6.png)
+![4](https://user-images.githubusercontent.com/48315997/89702024-bb9a2b00-d977-11ea-99ab-a850c92cf5f6.png)
 
-![스크린샷 2020-08-08 오후 12 51 39](https://user-images.githubusercontent.com/48315997/89702026-bd63ee80-d977-11ea-9d89-6f2b99c6b7f4.png)
+![5](https://user-images.githubusercontent.com/48315997/89702026-bd63ee80-d977-11ea-9d89-6f2b99c6b7f4.png)
 
 - Main Theorem.
 
@@ -95,7 +95,7 @@ At that point, C(G) achieves the value −log(4).
 - 그래서 알고리즘이 위 문제를 풀 수 있는가를 확인
 
 
-![스크린샷 2020-08-08 오후 12 57 04](https://user-images.githubusercontent.com/48315997/89702027-bf2db200-d977-11ea-85e9-4a4a6685a0da.png)
+![6](https://user-images.githubusercontent.com/48315997/89702027-bf2db200-d977-11ea-85e9-4a4a6685a0da.png)
 
 
 **1번==>minimax problem -> global opt. 가진다는 증명이었음.**
