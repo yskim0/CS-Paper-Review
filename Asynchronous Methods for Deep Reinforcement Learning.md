@@ -12,16 +12,16 @@ _DQN은 Playing Atari with Deep Reinforcement Learning 논문 Review 참고_
 2. correlation of observed data   
   + 연속적인 경험은 비슷하므로 관계를 정의하기 때문   
 <br>
-이를 해결하기 위해서 
-**experience replay memory**
-에 agent data 저장   
+이를 해결하기 위해서 experience replay memory에 agent data 저장   
 -> random sampling으로 replay memory에서 batch를 꺼내 학습   
+
   - off-policy 형태로 강제됨   
 
 ### multiple agents in multiple indepedent instance environment in parallel
 **Parallelism** : decorrelating agents' data => on-policy & off-policy 작동 가능   
 : 여러 agent를 동시(주어진 time-step)에 다른 environment에서 Action하여 Experience 쌓기 -> 결과 학습 네트워크 공유   
-  * __multi-threaded__: stationary policy를 갖게 됨
+  * __multi-threaded__: stationary policy를 갖게 됨   
+  
 ~~Experience Replay Memory 사용하지 않음~~
 
 ## Related Work
@@ -81,6 +81,8 @@ Critic: value function을 통해 현재 상태를 Evaluate
 ![update](https://user-images.githubusercontent.com/40893452/45300004-3407cf80-b548-11e8-847a-70cfd5fb3e6e.png)   
 <br>
 
+* * *
+
 ##### 모든 agent들이 공유하는 네트워크의 output *(모든 non-output layer들의 가중치는 공유)*
   1. policy π(At|St;θ): policy는 π (at | st; θ)에 대해 하나의 softmax 출력을 가지는 convolutional neural network를 사용  
   
@@ -92,6 +94,7 @@ Critic: value function을 통해 현재 상태를 Evaluate
   
   > θ,θv는 분리되어 있는 parameter가 아닌, 공유되는 parameter이다. (일부 parameter는 세상에서 공유됨)   
   
+* * *
 
 ##### Loss
 1. Policy Loss: Lp = log(π(s)) * A(s)   
@@ -117,3 +120,19 @@ L = Lp' + 0.5 * Lv
 ![code](http://openresearch.ai/uploads/default/original/1X/ecab76979198a73a645eb2c739797a9889e210c8.jpg)   
 
 ## Experiments
+1.   
+![Fig.1](http://openresearch.ai/uploads/default/original/1X/8ba0f1317daaa02b6e7c201edf89bab6001c79f2.png)   
+![Fig.2](http://openresearch.ai/uploads/default/original/1X/95ec528070bbb67b374e856440eb087e6f17a69e.png)   
+Atari 2600에서 대표적인 5가지 게임을 선정했고, DQN에 비해 더 짧은 시간에 더 높은 퍼포먼스를 보이는 agent를 안정적으로 학습했음
+
+2.   
+![Fig.3](http://openresearch.ai/uploads/default/original/1X/03439146388612e42d9fee1d8b679d06fd4f0dbb.png)   
+thread 수에 따라 매우 효과적으로 scale-up 됨   
+  - Data Exploration Ability의 향상으로 parallel한 worker 수가 증가함에 따라 트레이닝 시간이 단축됨   
+  > 놀랍게도 선형 이상으로 증가하기도 하는데, 이는 적은 수일때에 대비해서 bias를 제거해주는 effect로 해석했습니다.   
+  
+3.   
+![Fig.4](http://openresearch.ai/uploads/default/original/1X/db91be85605c914e28ec82267cb4c97ef13b4590.png)   
+Robust & Stable   
+  - RL에서 트레이닝 되던 Agent가 Collapse하거나 Diverge 하는 경우가 있어 트레이닝이 상대적으로 어려운데, A3C의 경우 hyperparameter 등에 따라 robust함   
+  - 특히 트레이닝이 잘되는 Learning Rate 구간 값 내에서는 Collapse 되는 결과 없었음
