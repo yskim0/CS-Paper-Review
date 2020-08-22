@@ -88,7 +88,8 @@
 
 - Solution to POMDP
 <img width="400" alt="스크린샷 2020-08-22 오전 2 35 32" src="https://user-images.githubusercontent.com/48315997/90918725-293a6280-e420-11ea-958a-b2c10565cbcc.png">
-    - observed trajectory를 가지고 optimal policy를 찾는 것(미래 보상의 합이 최대가 되는 action set, policy) == RL
+
+   - observed trajectory를 가지고 optimal policy를 찾는 것(미래 보상의 합이 최대가 되는 action set, policy) == RL
     - 그러나 주어진 데이터가 **partially** 하기 때문에 또 하나의 모듈이 필요함
     - **Belief State** 를 구할 수 있으면 위의 문제가 풀림.
     - Belief State -> POMDP -> Meta-RL 해결
@@ -108,23 +109,26 @@
 
 - Meta-RL using POMDP
 <img width="400" alt="스크린샷 2020-08-22 오전 2 50 42" src="https://user-images.githubusercontent.com/48315997/90919921-4839f400-e422-11ea-83ac-7e557be96989.png">
-    - A, S는 sharing
+
+- A, S는 sharing
         - S는 true state와 Agent 입장에서 모르는 task에 대한 w를 concat해서 만듦
     - 나머지들은 task-specific하게 정의
     - w만이 agent입장에서는 unobserved state라고 정의
 
 - optimal agent pi*는 아래와 같은 문제를 푼다.
 <img width="347" alt="스크린샷 2020-08-22 오전 2 55 53" src="https://user-images.githubusercontent.com/48315997/90920278-01003300-e423-11ea-803a-2b74a4d6a2d7.png">
-    - agent입장에서는 실제 task label인 w에 access 할 수 없다고 가정. (task에 대한 MDP를 다 모르는 것)
+
+- agent입장에서는 실제 task label인 w에 access 할 수 없다고 가정. (task에 대한 MDP를 다 모르는 것)
     - 과거 observation trajectories은 LSTM, GRU등으로 agent network는 학습할 수 있음.
     - POMDP 문제를 해결하려면 task에 대한 belief state를 계산할 수 있어야 함.
         - observation trajectory가 주어졌을 때 실제 true task일 확률 (posterior)
             - 이걸 계산할 수 있으면 POMDP 문제 해결, 그러나 계산 어려움. 
         - appendix)
         <img width="707" alt="스크린샷 2020-08-22 오전 3 00 31" src="https://user-images.githubusercontent.com/48315997/90920660-a74c3880-e423-11ea-9b68-b972b3d4da7d.png">
-            - belief state의 posterior는 bayes Rule과 유사
-            - **policy가 식 안에 없음 -> task에 대한 posterior는 policy와 independent하다.**
-            - off-policy algorithm 사용 가능 (보통 meta-RL에서는 on-policy : 데이터를 모으자마자 바로 업데이트)
+        
+- belief state의 posterior는 bayes Rule과 유사
+- **policy가 식 안에 없음 -> task에 대한 posterior는 policy와 independent하다.**
+- off-policy algorithm 사용 가능 (보통 meta-RL에서는 on-policy : 데이터를 모으자마자 바로 업데이트)
 
 ### Train
 
