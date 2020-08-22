@@ -112,6 +112,8 @@ __최종 loss__
 L = Lp' + 0.5 * Lv
 ```   
 
+* * *
+
 #### Overall Flow
 ![flow](http://openresearch.ai/uploads/default/original/1X/aa019a73a51f4a5e5d7db25d7e5c06e336be20d6.jpg)   
 1. thread 별로 생성된 agent가 shared parameter로부터 동일한 network(== global network) copy   
