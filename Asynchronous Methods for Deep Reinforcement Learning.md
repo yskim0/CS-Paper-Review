@@ -9,7 +9,7 @@ _DQN은 Playing Atari with Deep Reinforcement Learning 논문 Review 참고_
 > online RL algorithm과 deep neural network의 조합   
 > (online: RL agent가 학습 환경에서 시간 순으로 데이터를 얻음)   
 1. non-stationary problem when policy updates
-2. correlation of observed data
+2. correlation of observed data   
   + 연속적인 경험은 비슷하므로 관계를 정의하기 때문   
 <br>
 이를 해결하기 위해서 
@@ -21,7 +21,7 @@ _DQN은 Playing Atari with Deep Reinforcement Learning 논문 Review 참고_
 ### multiple agents in multiple indepedent instance environment in parallel
 **Parallelism** : decorrelating agents' data => on-policy & off-policy 작동 가능   
 : 여러 agent를 동시(주어진 time-step)에 다른 environment에서 Action하여 Experience 쌓기 -> 결과 학습 네트워크 공유   
-  * __multithreaded__: stationary policy를 갖게 됨
+  * __multi-threaded__: stationary policy를 갖게 됨
 ~~Experience Replay Memory 사용하지 않음~~
 
 ## Related Work
@@ -63,10 +63,10 @@ Asynchronous 1-step Q-learning에서 다른 target value Q(s,a)를 사용한다�
   + 1 machine에서 multi-thread 구현 (agent의 최대 개수 == thread 개수)   
   + 각 agent가 각기 다른 exploration policy를 갖음 => 성능 및 Robustness 증가   
 : 실제로 expected value보다 얼마나 더 나았는지 *Advantage*를 계산 -> loss에 사용    
-  '''
+  ```
   Advantage_A = Q(s,a) - V(s)   
   estimatedAdvantage_A' = R - V(s)
-  '''   
+  ```   
   > Q-Learning: discounted return을 직접 estimate   
 <br>
 
@@ -77,16 +77,43 @@ Critic: value function을 통해 현재 상태를 Evaluate
 #### A3C Algorithm
 * n-step Q-learning 알고리즘와 같이 forward view를 사용해서 policy와 value function을 업데이트   
 * policy와 value function 들은 모두 t(max) or terminal state에 도착한 후에 업데이트   
+
 ![update](https://user-images.githubusercontent.com/40893452/45300004-3407cf80-b548-11e8-847a-70cfd5fb3e6e.png)   
 <br>
+
 ##### 모든 agent들이 공유하는 네트워크의 output *(모든 non-output layer들의 가중치는 공유)*
   1. policy π(At|St;θ): policy는 π (at | st; θ)에 대해 하나의 softmax 출력을 가지는 convolutional neural network를 사용  
+  
   > policy π의 엔트로피를 loss function에 더하면 suboptimal 로의 premature convergence를 방지하여 exploration을 개선한다는 것을 발견했다.   
+  
   ![loss](https://user-images.githubusercontent.com/40893452/45300917-982b9300-b54a-11e8-8422-ad89709e1d88.png)   
+  
   2. value function, V(St;θv): value-function V(st; θv)에 대해 하나의 선형 출력을 가짐   
-  > θ,θv는 분리되어 있는 parameter가 아닌, 공유되는 parameter이다. (일부 parameter는 세상에서 공유됨)
+  
+  > θ,θv는 분리되어 있는 parameter가 아닌, 공유되는 parameter이다. (일부 parameter는 세상에서 공유됨)   
+  
 
 ##### Loss
+1. Policy Loss: Lp = log(π(s)) * A(s)   
+  _Advantage (A(s))가_   
+  - 양수 == 기대보다 좋은 경우: policy의 action이 1의 방향으로 training   
+  - 음수 == 기대보다 안 좋은 경우: policy의 action이 0의 방향으로 training   
+  => Advantage(실제 값 - 예측 값)을 줄어드는 방향으로 training == 실제 값과 예측 값이 비슷해지는 방향   
+  **이렇게 action이 얼마나 좋아져야 하는지 판단하기 때문에 "Action-Critic"이라고 부름**   
+  > 논문에서는 위의 일반적인 loss에 π에 대한 entropy loss를 아래와 같이 추가해서, 보수적인 모델로의 early converge를 막는다고 합니다.   
+  > ![policy_loss](https://user-images.githubusercontent.com/40893452/45300917-982b9300-b54a-11e8-8422-ad89709e1d88.png)   
+<br>
+2. Value Loss: W = sum(R - V(s))_2   
+```
+__최종 loss__
+L = Lp' + 0.5 * Lv
+```   
 
+#### Overall Flow
+![flow](http://openresearch.ai/uploads/default/original/1X/aa019a73a51f4a5e5d7db25d7e5c06e336be20d6.jpg)   
+1. thread 별로 생성된 agent가 shared parameter로부터 동일한 network(== global network) copy   
+2. 각 agent는 서로 다른 environment에서 서로 다른 exploration policy를 가지고 exploration   
+3~5. 각 agent가 value / policy loss로부터 gradient를 구하고 asynchronous하게 global network에 전달하여 shared parameter 업데이트   
+![code](http://openresearch.ai/uploads/default/original/1X/ecab76979198a73a645eb2c739797a9889e210c8.jpg)   
 
-  
+## Experiments
