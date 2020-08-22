@@ -57,7 +57,7 @@
     - **접근 방법**
         1. Recurrent policies : RNN
         2. Optimization problem : MAML
-        **3. partially observed RL**
+        3. **partially observed RL**
             - MDP의 모든 정보를 받는 게 아니라 부분적으로만 받는다 -> inference problem 추가됨
 
             ![스크린샷 2020-08-22 오전 2 24 11](https://user-images.githubusercontent.com/48315997/90917816-93520800-e41e-11ea-81ba-5cd461f513e4.png)
