@@ -33,6 +33,7 @@ _DQN은 Playing Atari with Deep Reinforcement Learning 논문 Review 참고_
   > -> DQN loss의 parameter로 미분된 gradient를 _central parameter server_로 전달
   > -> model의 global environment update
   > -> update된 model의 policy parameter은 fixed interval을 통해 agent에게 전달됨   
+  
 2. Map Reduce Framework   
 : linear function approximation을 통해 batch RL algorithm을 parallel 학습
   * Parallelism: large matrix operation 가속화, agent의 experience를 parallel 수집하는 것이 아님.   
@@ -68,7 +69,6 @@ Asynchronous 1-step Q-learning에서 다른 target value Q(s,a)를 사용한다�
   estimatedAdvantage_A' = R - V(s)
   ```   
   > Q-Learning: discounted return을 직접 estimate   
-<br>
 
 #### Actor-Critic
 Actor: policy를 통해 action을 취하는 Agent   
@@ -127,12 +127,16 @@ L = Lp' + 0.5 * Lv
 ![Fig.2](http://openresearch.ai/uploads/default/original/1X/95ec528070bbb67b374e856440eb087e6f17a69e.png)   
 Atari 2600에서 대표적인 5가지 게임을 선정했고, DQN에 비해 더 짧은 시간에 더 높은 퍼포먼스를 보이는 agent를 안정적으로 학습했음
 
+* * *
+
 2.   
 ![Fig.3](http://openresearch.ai/uploads/default/original/1X/03439146388612e42d9fee1d8b679d06fd4f0dbb.png)   
 thread 수에 따라 매우 효과적으로 scale-up 됨   
   - Data Exploration Ability의 향상으로 parallel한 worker 수가 증가함에 따라 트레이닝 시간이 단축됨   
   > 놀랍게도 선형 이상으로 증가하기도 하는데, 이는 적은 수일때에 대비해서 bias를 제거해주는 effect로 해석했습니다.   
   
+* * *
+
 3.   
 ![Fig.4](http://openresearch.ai/uploads/default/original/1X/db91be85605c914e28ec82267cb4c97ef13b4590.png)   
 Robust & Stable   
