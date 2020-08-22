@@ -136,3 +136,12 @@ thread 수에 따라 매우 효과적으로 scale-up 됨
 Robust & Stable   
   - RL에서 트레이닝 되던 Agent가 Collapse하거나 Diverge 하는 경우가 있어 트레이닝이 상대적으로 어려운데, A3C의 경우 hyperparameter 등에 따라 robust함   
   - 특히 트레이닝이 잘되는 Learning Rate 구간 값 내에서는 Collapse 되는 결과 없었음
+
+## Code
+https://github.com/awjuliani/DeepRL-Agents/blob/master/A3C-Doom.ipynb   
+
+## Reference
+http://openresearch.ai/t/a3c-asynchronous-methods-for-deep-reinforcement-learning/25   
+https://github.com/170928/-Review-Asynchronous-Methods-for-Deep-Reinforcement-Learning   
+https://medium.com/@awjuliani/super-simple-reinforcement-learning-tutorial-part-1-fd544fab149   
+https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2
