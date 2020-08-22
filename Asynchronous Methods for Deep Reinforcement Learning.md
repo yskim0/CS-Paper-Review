@@ -106,7 +106,8 @@ Critic: value function을 통해 현재 상태를 Evaluate
   > 논문에서는 위의 일반적인 loss에 π에 대한 entropy loss를 아래와 같이 추가해서, 보수적인 모델로의 early converge를 막는다고 합니다.   
   > ![policy_loss](https://user-images.githubusercontent.com/40893452/45300917-982b9300-b54a-11e8-8422-ad89709e1d88.png)   
 <br>
-2. Value Loss: W = sum(R - V(s))_2   
+2. Value Loss: W = sum(R - V(s))_2  
+
 ```
 __최종 loss__
 L = Lp' + 0.5 * Lv
