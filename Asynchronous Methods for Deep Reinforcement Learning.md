@@ -57,12 +57,36 @@ Asynchronous 1-step Q-learning에서 다른 target value Q(s,a)를 사용한다�
 ![n_Q](https://user-images.githubusercontent.com/40893452/45205494-46220d80-b2bd-11e8-8445-76374c9a5830.png)   
 > forward view(== n step 앞의 결과)를 본다는 점에서 일반적이지 않습니다. 이런 forward view를 사용하는 것은 neural network를 학습하는 과정에서 momentum-based methods와 backpropagation 과정에서 훨씬 더 효과적인 학습이 가능하도록 해 줍니다. 한번의 업데이트를 위해서, 알고리즘은 policy를 기반으로 action을 고르며 최대 t(max)-step(또는 state가 끝날 때 까지)까지 미리 action을 고릅니다. 이 과정을 통해 agent가 t(max)까지의 rewards를 마지막으로 update했던 state으로부터 한번에 받아옵니다.
 
-### Asynchronous Advantagge Actor-Critic(A3C) RL
+### Asynchronous Advantagge Actor-Critic(A3C) RL   
+![overall](http://openresearch.ai/uploads/default/original/1X/710e633cbbad482b3b424e5d95162a2039995778.jpg)   
+: 여러 agent가 각기 다른 environment에서 Action을 취하며 Experience를 얻음
+  + 1 machine에서 multi-thread 구현 (agent의 최대 개수 == thread 개수)   
+  + 각 agent가 각기 다른 exploration policy를 갖음 => 성능 및 Robustness 증가   
+: 실제로 expected value보다 얼마나 더 나았는지 *Advantage*를 계산 -> loss에 사용    
+  '''
+  Advantage_A = Q(s,a) - V(s)   
+  estimatedAdvantage_A' = R - V(s)
+  '''   
+  > Q-Learning: discounted return을 직접 estimate   
+<br>
 
-> Actor: policy를 통해 action을 취하는 Agent
-> Critic: value function을 통해 현재 상태를 Evaluate
+#### Actor-Critic
+Actor: policy를 통해 action을 취하는 Agent   
+Critic: value function을 통해 현재 상태를 Evaluate
 
+#### A3C Algorithm
 * n-step Q-learning 알고리즘와 같이 forward view를 사용해서 policy와 value function을 업데이트   
-> Q-Learning: discounted return을 직접 update
-  
+* policy와 value function 들은 모두 t(max) or terminal state에 도착한 후에 업데이트   
+![update](https://user-images.githubusercontent.com/40893452/45300004-3407cf80-b548-11e8-847a-70cfd5fb3e6e.png)   
+<br>
+##### 모든 agent들이 공유하는 네트워크의 output *(모든 non-output layer들의 가중치는 공유)*
+  1. policy π(At|St;θ): policy는 π (at | st; θ)에 대해 하나의 softmax 출력을 가지는 convolutional neural network를 사용  
+  > policy π의 엔트로피를 loss function에 더하면 suboptimal 로의 premature convergence를 방지하여 exploration을 개선한다는 것을 발견했다.   
+  ![loss](https://user-images.githubusercontent.com/40893452/45300917-982b9300-b54a-11e8-8422-ad89709e1d88.png)   
+  2. value function, V(St;θv): value-function V(st; θv)에 대해 하나의 선형 출력을 가짐   
+  > θ,θv는 분리되어 있는 parameter가 아닌, 공유되는 parameter이다. (일부 parameter는 세상에서 공유됨)
+
+##### Loss
+
+
   
