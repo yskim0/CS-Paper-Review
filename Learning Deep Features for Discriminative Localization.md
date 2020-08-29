@@ -52,9 +52,10 @@ attention-based model instantly by tweaking your own CNN
 
 이 때, weighted sum을 M_c(x,y)로 정의할 수 있는데, 이는 클래스 c에 대한 Map이다.   
 ![map](https://you359.github.io/images/contents/cam_what-is-cam.png)   
+
 ```
-_CAM이 특정 클래스 c를 구별하기 위해 CNN이 어떤 영역을 주목하고 있는지 시각화하는 방법이므로,   
-해당 Map의 집합(== 이를 average pooling한 값인 S_c)이 CAM을 의미한다._   
+CAM이 특정 클래스 c를 구별하기 위해 CNN이 어떤 영역을 주목하고 있는지 시각화하는 방법이므로,   
+해당 Map의 집합(== 이를 average pooling한 값인 S_c)이 CAM을 의미한다.   
 ```
 <br>
 
@@ -153,6 +154,6 @@ _https://github.com/zhoubolei/CAM_
 ```
 
 ## Reference
-https://you359.github.io/cnn%20visualization/CAM/
-https://kangbk0120.github.io/articles/2018-02/cam
-https://dambi-ml.tistory.com/5
+https://you359.github.io/cnn%20visualization/CAM/   
+https://kangbk0120.github.io/articles/2018-02/cam   
+https://dambi-ml.tistory.com/5   
