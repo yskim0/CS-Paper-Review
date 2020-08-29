@@ -2,10 +2,10 @@
 
 ## Overview
 
-_**1. CNN이 어떤 데이터의 정보를 중요하게 생각해 최종적인 결과를 냈는지 알아보고,**_   
-₩ Weakly-supervised Learning for Object Localization ₩   
-_**2. 이를 이용해 CNN을 classification 뿐만 아니라, detector로 작용해 discriminative image region을 찾는, localization 기능을 수행한다.**_   
-₩ Visualize class discriminative features ₩   
+**1. CNN이 어떤 데이터의 정보를 중요하게 생각해 최종적인 결과를 냈는지 알아보고,**   
+` Weakly-supervised Learning for Object Localization `   
+**2. 이를 이용해 CNN을 classification 뿐만 아니라, detector로 작용해 discriminative image region을 찾는, localization 기능을 수행한다.**   
+` Visualize class discriminative features `   
 <br>
 
 > CNN: 위치 정보에 대한 supervision 없이도 object detectors로 작용한다.   
@@ -37,9 +37,10 @@ attention-based model instantly by tweaking your own CNN
 
 #### 1. GAP vs GMP   
 ![gap_gmp](https://you359.github.io/images/contents/cam_gap.png)   
-1. feature map의 f_k(x,y)는 GAP를 통해 F_k로 summation 된다.   
-2. 이를 다시 CNN의 마지막 layer인 S_c로 전달하면서 w_k_c * f_k(x,y)- linear combination(== weighted sum)- 을 구한다.
-3. S_c를 softmax layer
+1. feature map(중 하나)인 f_k(x,y)는 GAP를 통해 F_k로 summation 된다.   
+2. 이를 다시 CNN의 마지막 layer인 fully connected로 전달하면서 w_k_c * f_k(x,y)- linear combination(== weighted sum)- 을 구한다.
+3. S_c를 softmax layer에 전달하여 최종 output을 pooling한다.
+
 
 #### 2. FC vs GAP
 ![fc_gap](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FboM0El%2FbtqBtGTWdxd%2FT3SfcjlZ9mk1uFsirLkLT0%2Fimg.png)   
