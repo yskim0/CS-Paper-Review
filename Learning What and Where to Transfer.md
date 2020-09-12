@@ -12,7 +12,8 @@
 > > [ Limitations of previous methods ]
 > > * require the same architecture between a source and target models
 > > * require exhaustive hand-crafted tuning (ex. attention transfer, Jacobian matching)
-<br>
+
+* * *
 
 ### Meta-learning based Transfer-learning: Learning What / Where to Transfer(L2T-ww)
 1. selective transfer depending on a source and target task relation
@@ -56,6 +57,8 @@ _Proposed Bilevel Scheme for training meta-parameters φ_
 - effective for learning φ with a small number of steps T -> reduced time
 - learns θ and φ simultaneously without separate meta-learning phase   
 
+* * *
+
 #### Learned Matching
 <img width="182" alt="model" src="https://user-images.githubusercontent.com/49134038/92985194-593ec800-f4eb-11ea-92c4-9c7696beff82.png">
 
@@ -63,17 +66,20 @@ _Proposed Bilevel Scheme for training meta-parameters φ_
 ## Experiments
 1. with Various Tasks and Architectures
 <img width="709" alt="result1" src="https://user-images.githubusercontent.com/49134038/92985278-16312480-f4ec-11ea-91f7-514da0e65824.png">   
-+ Learning __WHAT to Transfer__ improves all the baselines
-+ Learning __WHERE to Transfer__ gives more improvements on what to transfer
+
+* Learning __WHAT to Transfer__ improves all the baselines
+* Learning __WHERE to Transfer__ gives more improvements on what to transfer
 
 2. with Different Architectures, Initializations, and Datasets
 <img width="602" alt="result2" src="https://user-images.githubusercontent.com/49134038/92985280-1a5d4200-f4ec-11ea-86f3-16d85621ea39.png">   
 
 3. with Limited Data-Regime(Settings) Experiments
 <img width="219" alt="result2 2" src="https://user-images.githubusercontent.com/49134038/92985281-1b8e6f00-f4ec-11ea-9be5-3ee34c3f522d.png">   
-+ Smaller the volume of the target dataset, more relative gain of the results
-+ In other words, efficiency boosts up the performance of a target model
+
+* Smaller the volume of the target dataset, more relative gain of the results
+* In other words, efficiency boosts up the performance of a target model
 
 4. Saliency Map comparing unweighted(FM) and weighted(L2T-w)
 <img width="451" alt="result3" src="https://user-images.githubusercontent.com/49134038/92985282-1cbf9c00-f4ec-11ea-80c7-742d463f48c2.png">   
-+ more and less activated pixels in L2T-w
+
+* more and less activated pixels in L2T-w
