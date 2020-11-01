@@ -25,7 +25,8 @@
 
 ## Related work (Basic concepts)
 
-
+제안한 모델이 최근 연구 중에서는 iGPT 논문과 유사하다고 함.
+- reducing image resolution and color space한 후 transformer를 적용
 
 ## Methods
 (Explain one of the methods that the thesis used.)
