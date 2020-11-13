@@ -44,6 +44,8 @@ fine-tuned = utilize to fine-tune preliminary images into final detailed outputs
 * sparser edges and pixel-level color style 을 input으로 받아 with both high-fidelity in content and style image를 만들어냄.   
 * Imitation Phase, Generating Phase and Refinement Phase 로 구성되어 있으며 하나의 Generator와 Discrriminator 이용.   
 
+![overall](https://github.com/youyuge34/PI-REC/blob/master/files/architecture_v5.png)   
+
 #### 1. Preprocessing of training Data
 + Edge   
   - Canny algorithm 이용: rough but solid binary edges
@@ -56,8 +58,6 @@ fine-tuned = utilize to fine-tune preliminary images into final detailed outputs
   - extracted edge의 each pixel은 8%의 확률로 0 값으로 reset 될 수 있음 (스케치의 선이 edge일 확률을 92%로 가정한 것.): generalization ability 향상   
 
 #### 2. Model Architecture
-![overall](https://github.com/youyuge34/PI-REC/blob/master/files/architecture_v5.png)   
-
 ``` Generator ```      
  1. Imitation Phase   
  optimality 도달 = output distribution p(X_fake-1)이 the distribution of ground truth image p(Xgt)가 같은 상태 (the Imitation Phase output = X_fake-1)   
