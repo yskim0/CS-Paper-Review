@@ -135,16 +135,24 @@ class ResNetMulti(nn.Module):
 ```
 ```   
    
+## Result
+![1](https://github.com/feipan664/IntraDA/blob/65a118754b063285f2d93cc66e15b3bb4166328d/figure/introduction.png)   
+![2](https://github.com/feipan664/IntraDA/blob/65a118754b063285f2d93cc66e15b3bb4166328d/figure/results.png)   
+![3](https://github.com/feipan664/IntraDA/blob/65a118754b063285f2d93cc66e15b3bb4166328d/figure/examples.png)   
+   
 ## Background
-
 adversarial learning-based UDA approaches (Murez et al., 2017, Hoffman et al., 2017, Tsai et al., 2019, Tsai et al., 2018, Vu et al., 2018)   
 the entropy of pixel-wise output predictions (Tsai et al., 2019)   
 generating pseudo labels for target data and conducting refinement via an iterative self-training process.   
 address the issue of multiple source domains; it focus on the multiple-source single-target adaptation setting.   
    
 1.	Unsupervised Domain Adaptation.
-
 2.	Uncertainty via Entropy.
-
-3.	Curriculum Domain Adaptation.
-
+3.	Curriculum Domain Adaptation.   
+   
+## Reference
+Hoffman, J., Tzeng, E., Park, T., Zhu, J., Isola, P., Saenko, K., Efros, A.A. & Darrell, T. 2017, "CyCADA: Cycle-Consistent Adversarial Domain Adaptation", CoRR, vol. abs/1711.03213.   
+Murez, Z., Kolouri, S., Kriegman, D.J., Ramamoorthi, R. & Kim, K. 2017, "Image to Image Translation for Domain Adaptation", CoRR, vol. abs/1712.00479.   
+Tsai, Y., Hung, W., Schulter, S., Sohn, K., Yang, M. & Chandraker, M. 2018, "Learning to Adapt Structured Output Space for Semantic Segmentation", CoRR, vol. abs/1802.10349.   
+Tsai, Y., Sohn, K., Schulter, S. & Chandraker, M. 2019, "Domain Adaptation for Structured Output via Discriminative Patch Representations", CoRR, vol. abs/1901.05427.   
+Vu, T., Jain, H., Bucher, M., Cord, M. & P 'erez, P. 2018, "ADVENT: Adversarial Entropy Minimization for Domain Adaptation in Semantic Segmentation", CoRR, vol. abs/1811.12833.   
