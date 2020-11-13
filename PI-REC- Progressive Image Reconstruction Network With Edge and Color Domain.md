@@ -58,17 +58,17 @@ fine-tuned = utilize to fine-tune preliminary images into final detailed outputs
 #### 2. Model Architecture
 ![overall](https://github.com/youyuge34/PI-REC/blob/master/files/architecture_v5.png)   
 
-+ Generator      
- ``` Imitation Phase ```   
+``` Generator ```      
+ 1. Imitation Phase   
  optimality 도달 = output distribution p(X_fake-1)이 the distribution of ground truth image p(Xgt)가 같은 상태 (the Imitation Phase output = X_fake-1)   
- ``` Generating Phase ```   
- - G1-1이 (0으로) 수렴 = Generator가 inirialized features를 잘 학습한 상태.   
- - detail을 더 빠르게 생성, 수렴한 결과 빨리 도출 (with input: edge E and color domain C_gt)   
- ``` Refinement Phase ```   
- - G1-3을 의미
- - checkerboard artifact 줄이고 more high frequency details 생성 및 optimize the color distribution
-
-+ Discriminator   
+ 2. Generating Phase   
+   - G1-1이 (0으로) 수렴 = Generator가 inirialized features를 잘 학습한 상태.   
+   - detail을 더 빠르게 생성, 수렴한 결과 빨리 도출 (with input: edge E and color domain C_gt)   
+ 3. Refinement Phase   
+   - G1-3을 의미
+   - checkerboard artifact 줄이고 more high frequency details 생성 및 optimize the color distribution
+   
+``` Discriminator ```    
 PatchGAN architecture with spectral normalization 이용: fake를 검출하기 위해 larger receptive field 사용
 
 #### 3. Model loss
@@ -121,7 +121,9 @@ def test_G(self): // test
             //
 
        // print('\nEnd test....')
-       
+```
+   
+```
 def test_R(self): // refinement
         self.r_model.eval()
 
@@ -160,7 +162,9 @@ def test_R(self): // refinement
                 # imsave(color_domain, os.path.join(self.results_path, fname + '_color_domain.' + fext))
 
         print('\nEnd refinement....')
-
+```
+   
+```
 def test_G_R(self): // test with refinement // overall process
         self.g_model.eval()
         self.r_model.eval()
@@ -210,7 +214,9 @@ def test_G_R(self): // test with refinement // overall process
             imsave(output, os.path.join(self.results_path, fname + '_refine.' + fext))
 
         print('\nEnd test with refinement....')
-        
+```
+   
+```
 def draw(self, color_domain, edge): // edge
         self.g_model.eval()
         size = self.config.INPUT_SIZE
@@ -235,7 +241,9 @@ def draw(self, color_domain, edge): // edge
         edge = edge.cpu().numpy().astype(np.uint8).squeeze()
 
         return output
-
+```
+   
+```
 def refine(self, img_blur, edge): // blurry
         self.r_model.eval()
         size = self.config.INPUT_SIZE
@@ -260,11 +268,18 @@ def refine(self, img_blur, edge): // blurry
         edge = edge.cpu().numpy().astype(np.uint8).squeeze()
 
         return output
-        
+```
+   
+```
 def postprocess(self, img):
         # [0, 1] => [0, 255]
         img = img * 255.0
-        img = img.permute(0, 2, 3, 1)
+        img = img.permute(0, 2, 3, 1)   
+        
+        > the 4 dimensions of input_patch are <batch size, image height, image width, image channel> respectively.   
+        > In Pytorch, the input channel should be in the second dimension. That's why the permutation is required.   
+        > After the permutation, the 4 dimensions of in_img will be <batch size, image channel, image height, image width>.   
+        
         return img.int()
 ```
 
