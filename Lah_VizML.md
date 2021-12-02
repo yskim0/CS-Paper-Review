@@ -1,19 +1,3 @@
----
-title: 'VizML: A Machine Learning Approach to Visualizaation Recommendation 논문 리뷰'
-date: 2021-05-18 23:19:37
-categories:
-   - Graduation Project
-   - Paper Review
-tags:
-   - recommendation
-   - recommendation system
-   - visualization
-   - data visualization
-   - infobiz
-   - HCI
----
-
-
 
 > ### Visualization Recommender System
 >
